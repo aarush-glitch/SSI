@@ -122,6 +122,8 @@ class Nurse:
             patientOnSteroids = data.get('patientOnSteroids')
             diabeticPatient = data.get('diabeticPatient')
             weight = data.get('weight')
+            height = data.get('height')
+            bmi = data.get('bmi')
             alcoholConsumption = data.get('alcoholConsumption')
             tobaccoConsumption = data.get('tobaccoConsumption')
             lengthOfSurgery = data.get('lengthOfSurgery')
@@ -149,6 +151,8 @@ class Nurse:
                 'patientOnSteroids': patientOnSteroids,
                 'diabeticPatient': diabeticPatient,
                 'weight': weight,
+                'height': height,
+                'bmi': bmi,
                 'alcoholConsumption': alcoholConsumption,
                 'tobaccoConsumption': tobaccoConsumption,
                 'lengthOfSurgery': lengthOfSurgery,
@@ -180,7 +184,6 @@ class Nurse:
         except Exception as e:
             logging.error(f'{LOG_PREFIX}, "Result":"Failure", "Reason":"{e}"')
             return None
-
     # def _add_microbiology_details(self, LOG_PREFIX, data):
     #     try:
     #         log.info(f"{LOG_PREFIX} - Received data: {data}")

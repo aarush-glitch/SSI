@@ -79,16 +79,61 @@ export const submitSSIEvaluationForm = async (formData) => {
   }
 };
 
+// export const submitSurveillanceForm = async (formData) => {
+//   try {
+//     const response = await fetch(surveillanceFormUrl, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(formData),
+//     });
+//     return await response.json();
+//   } catch (error) {
+//     console.error('submitSurveillanceForm error:', error);
+//     return { status: 'ERROR', msg: error.message || 'Network error while submitting surveillance form.' };
+//   }
+// };
+
 export const submitSurveillanceForm = async (formData) => {
   try {
+    // Transform data to match Django expectations
+    const payload = {
+      ...formData,
+      // Fix case mismatches (React -> Django)
+      // weight: formData.Weight,  // Map 'Weight' (React) to 'weight' (Django)
+      bmi: formData.bmi || null,
+      dateOfAdmission: formData.dateOfAdmission || null,  // Handle empty dates
+      dateOfProcedure: formData.dateOfProcedure || null,
+      dateOfEvent: formData.dateOfEvent || null
+    };
+    
+    // Remove React-only fields that Django doesn't expect
+    // delete payload.Weight;
+    // delete payload.Height;
+    // delete payload.BMI;
+
     const response = await fetch(surveillanceFormUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      headers: { 
+        'Content-Type': 'application/json',
+        // No CSRF token needed since using @csrf_exempt
+      },
+      body: JSON.stringify(payload),
+      credentials: 'include' // Still required for session cookies
     });
+
+    // Handle non-2xx responses
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(
+        errorData.msg || 
+        errorData.message || 
+        `HTTP error! status: ${response.status}`
+      );
+    }
+
     return await response.json();
   } catch (error) {
-    console.error('submitSurveillanceForm error:', error);
-    return { status: 'ERROR', msg: error.message || 'Network error while submitting surveillance form.' };
+    console.error('API submission failed:', error);
+    throw error; // Re-throw for handling in UI layer
   }
 };

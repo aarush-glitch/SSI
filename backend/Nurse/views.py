@@ -162,6 +162,71 @@ def add_nurse_details(request, *args, **kwargs):
         return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Internal Server Error!"})
 
 
+# @csrf_exempt
+# @require_http_methods(["POST"])
+# def add_patient_administration_details(request, *args, **kwargs):
+#     EVENT = "AddPatientAdministration"
+#     IP = client_ip(request)
+#     LOG_PREFIX = f'"EventName":"{EVENT}", "IP":"{IP}"'
+#     cls_nurse = Nurse()
+
+#     try:
+#         decoded_body = json.loads((request.body).decode())
+#         form = PatientAdministrationForm(decoded_body)
+
+#         if not form.is_valid():
+#             return JsonResponse({"status": "FAILURE", "statuscode": 400, "msg": form.errors})
+
+
+#         patient_id = 'P_' + ''.join(random.choices('0123456789ABCDEF', k=16))
+
+#         request.session['patient_id'] = patient_id
+#         request.session['form1_completed'] = True
+#         log.info("PATIENT ID :%s" % patient_id)
+#         request.session.modified = True  # Mark session as modified to ensure saving
+
+#         data_dict = {
+#             'patient_id': patient_id,
+#             'patientName': decoded_body.get('patientName'),
+#             'age': decoded_body.get('age'),
+#             'gender': decoded_body.get('gender'),
+#             'patientOnSteroids': decoded_body.get('patientOnSteroids'),
+#             'diabeticPatient': decoded_body.get('diabeticPatient'),
+#             'weight': decoded_body.get('weight'),
+#             'alcoholConsumption': decoded_body.get('alcoholConsumption'),
+#             'tobaccoConsumption': decoded_body.get('tobaccoConsumption'),
+#             'lengthOfSurgery': decoded_body.get('lengthOfSurgery'),
+#             'dateOfAdmission': decoded_body.get('dateOfAdmission'),
+#             'dateOfProcedure': decoded_body.get('dateOfProcedure'),
+#             'admittingDepartment': decoded_body.get('admittingDepartment'),
+#             'departmentPrimarySurgeon': decoded_body.get('departmentPrimarySurgeon'),
+#             'procedureName': decoded_body.get('procedureName'),
+#             'diagnosis': decoded_body.get('diagnosis'),
+#             'procedureDoneBy': decoded_body.get('procedureDoneBy'),
+#             'operationTheatre': decoded_body.get('operationTheatre'),
+#             'outpatientProcedure': decoded_body.get('outpatientProcedure'),
+#             'scenarioProcedure': decoded_body.get('scenarioProcedure'),
+#             'woundClass': decoded_body.get('woundClass'),
+#             'papGiven': decoded_body.get('papGiven'),
+#             'antibioticsGiven': decoded_body.get('antibioticsGiven'),
+#             'durationPAP': decoded_body.get('durationPAP'),
+#             'ssiEventOccurred': decoded_body.get('ssiEventOccurred'),
+#             'dateOfEvent': decoded_body.get('dateOfEvent')
+#         }
+
+#         insert_patient = cls_nurse._add_patient_administration_details(LOG_PREFIX, data=data_dict)
+#         log.info("INSERT PATIENT ADMINISTRATION DETAILS :%s" % insert_patient)
+
+#         if insert_patient:
+#             return JsonResponse(
+#                 {"status": "SUCCESS", "statuscode": 200, "msg": "Patient administration details added successfully!"})
+#         else:
+#             return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Failed to add patient admininstration details!"})
+
+#     except Exception as e:
+#         log.error(f'{LOG_PREFIX}, "Result":"Failure", "Reason":"{e}"')
+#         return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Internal Server Error!"})
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def add_patient_administration_details(request, *args, **kwargs):
@@ -175,58 +240,60 @@ def add_patient_administration_details(request, *args, **kwargs):
         form = PatientAdministrationForm(decoded_body)
 
         if not form.is_valid():
-            return JsonResponse({"status": "FAILURE", "statuscode": 400, "msg": form.errors})
-
+            log.error(f'{LOG_PREFIX}, "FormErrors":"{form.errors.as_json()}"')
+            return JsonResponse({"status": "FAILURE", "statuscode": 400, "msg": form.errors.as_json()})
 
         patient_id = 'P_' + ''.join(random.choices('0123456789ABCDEF', k=16))
 
         request.session['patient_id'] = patient_id
         request.session['form1_completed'] = True
         log.info("PATIENT ID :%s" % patient_id)
-        request.session.modified = True  # Mark session as modified to ensure saving
+        request.session.modified = True
 
         data_dict = {
             'patient_id': patient_id,
-            'patientName': decoded_body.get('patientName'),
-            'age': decoded_body.get('age'),
-            'gender': decoded_body.get('gender'),
-            'patientOnSteroids': decoded_body.get('patientOnSteroids'),
-            'diabeticPatient': decoded_body.get('diabeticPatient'),
-            'weight': decoded_body.get('weight'),
-            'alcoholConsumption': decoded_body.get('alcoholConsumption'),
-            'tobaccoConsumption': decoded_body.get('tobaccoConsumption'),
-            'lengthOfSurgery': decoded_body.get('lengthOfSurgery'),
-            'dateOfAdmission': decoded_body.get('dateOfAdmission'),
-            'dateOfProcedure': decoded_body.get('dateOfProcedure'),
-            'admittingDepartment': decoded_body.get('admittingDepartment'),
-            'departmentPrimarySurgeon': decoded_body.get('departmentPrimarySurgeon'),
-            'procedureName': decoded_body.get('procedureName'),
-            'diagnosis': decoded_body.get('diagnosis'),
-            'procedureDoneBy': decoded_body.get('procedureDoneBy'),
-            'operationTheatre': decoded_body.get('operationTheatre'),
-            'outpatientProcedure': decoded_body.get('outpatientProcedure'),
-            'scenarioProcedure': decoded_body.get('scenarioProcedure'),
-            'woundClass': decoded_body.get('woundClass'),
-            'papGiven': decoded_body.get('papGiven'),
-            'antibioticsGiven': decoded_body.get('antibioticsGiven'),
-            'durationPAP': decoded_body.get('durationPAP'),
-            'ssiEventOccurred': decoded_body.get('ssiEventOccurred'),
-            'dateOfEvent': decoded_body.get('dateOfEvent')
+            'patientName': form.cleaned_data['patientName'],
+            'age': form.cleaned_data['age'],
+            'gender': form.cleaned_data['gender'],
+            'patientOnSteroids': form.cleaned_data['patientOnSteroids'],
+            'diabeticPatient': form.cleaned_data['diabeticPatient'],
+            'weight': form.cleaned_data['weight'],
+            'height': form.cleaned_data['height'],
+            'bmi': form.cleaned_data['bmi'],
+            'alcoholConsumption': form.cleaned_data['alcoholConsumption'],
+            'tobaccoConsumption': form.cleaned_data['tobaccoConsumption'],
+            'lengthOfSurgery': form.cleaned_data['lengthOfSurgery'],
+            'dateOfAdmission': form.cleaned_data['dateOfAdmission'],
+            'dateOfProcedure': form.cleaned_data['dateOfProcedure'],
+            'admittingDepartment': form.cleaned_data['admittingDepartment'],
+            'departmentPrimarySurgeon': form.cleaned_data['departmentPrimarySurgeon'],
+            'procedureName': form.cleaned_data['procedureName'],
+            'diagnosis': form.cleaned_data['diagnosis'],
+            'procedureDoneBy': form.cleaned_data['procedureDoneBy'],
+            'operationTheatre': form.cleaned_data['operationTheatre'],
+            'outpatientProcedure': form.cleaned_data['outpatientProcedure'],
+            'scenarioProcedure': form.cleaned_data['scenarioProcedure'],
+            'woundClass': form.cleaned_data['woundClass'],
+            'papGiven': form.cleaned_data['papGiven'],
+            'antibioticsGiven': form.cleaned_data['antibioticsGiven'],
+            'durationPAP': form.cleaned_data['durationPAP'],
+            'ssiEventOccurred': form.cleaned_data['ssiEventOccurred'],
+            'dateOfEvent': form.cleaned_data['dateOfEvent'],
         }
 
         insert_patient = cls_nurse._add_patient_administration_details(LOG_PREFIX, data=data_dict)
-        log.info("INSERT PATIENT ADMINISTRATION DETAILS :%s" % insert_patient)
+        log.info(f'{LOG_PREFIX}, "InsertResult":"{insert_patient}"')
 
         if insert_patient:
             return JsonResponse(
                 {"status": "SUCCESS", "statuscode": 200, "msg": "Patient administration details added successfully!"})
         else:
-            return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Failed to add patient admininstration details!"})
+            log.error(f'{LOG_PREFIX}, "InsertFailed":"No details added"')
+            return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Failed to add patient administration details!"})
 
     except Exception as e:
-        log.error(f'{LOG_PREFIX}, "Result":"Failure", "Reason":"{e}"')
-        return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": "Internal Server Error!"})
-
+        log.error(f'{LOG_PREFIX}, "Result":"Failure", "Reason":"{str(e)}"')
+        return JsonResponse({"status": "FAILURE", "statuscode": 500, "msg": f"Internal Server Error: {str(e)}"})
 ##Without prediction
 # @csrf_exempt
 # @require_http_methods(["POST"])
