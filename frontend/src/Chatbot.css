@@ -1,0 +1,130 @@
+/* Chatbot.css */
+.chatbot-wrapper {
+    position: fixed;
+    bottom: 20px;
+    right: 20px; /* Adjusted to left side */
+    z-index: 1000;
+  }
+  
+  .chatbot-toggle {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .chatbot-toggle.left {
+    margin-left: 0;
+  }
+  
+  .chatbot-container {
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .chat-header {
+    background-color: #4f46e5;
+    color: white;
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 18px;
+  }
+  
+  .chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .chat-message {
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    font-size: 14px;
+    margin: 0.5rem 0;
+  }
+  
+  .chat-message.user {
+    align-self: flex-end;
+    background-color: #e0e0e0;
+  }
+  
+  .chat-message.bot {
+    align-self: flex-start;
+    background-color: #e9e9ff;
+  }
+  
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background-color: #f9f9f9;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  
+  .chat-input button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .chat-options {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 10px;
+  }
+  
+  .chat-options button {
+    background-color: #4f46e5;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .chat-message ul {
+    padding-left: 1.25rem;
+    margin: 0.5rem 0;
+    list-style-type: disc;
+  }
+  .chat-message strong {
+    font-weight: 600;
+    color: #333;
+  }
+  input[list="medical-terms"] {
+    width: 100%;
+    padding: 10px;
+  }
+  .typing-indicator {
+    font-style: italic;
+    color: #888;
+    margin: 10px;
+    text-align: center;
+  }

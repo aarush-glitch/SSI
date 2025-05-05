@@ -1,0 +1,139 @@
+/* Taskbar Styling */
+.taskbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f51b5;
+  padding: 15px 30px;
+  color: white;
+  border-bottom: 3px solid #303f9f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 50px;
+  margin-right: 15px;
+}
+
+.hospital-name {
+  font-size: 2em;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* General Page Styling */
+.nurse-page {
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+  min-height: 100vh;
+  padding-top: 120px; /* Offset for the fixed taskbar */
+}
+
+/* Page Text */
+.page-text {
+  font-size: 1.4rem;
+  color: #555;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+/* Form Buttons Container */
+.form-selection-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px;
+}
+
+/* Button Styling */
+.form-buttons button {
+  padding: 20px 15px; /* Increased padding for larger button size */
+  font-size: 1.2rem; /* Larger text size for better readability */
+  color: white;
+  background-color: #3f51b5;
+  border: none;
+  border-radius: 10px; /* Rounded corners for a modern look */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+  text-transform: uppercase; /* Capitalize text for emphasis */
+  font-weight: 500;
+}
+
+.form-buttons button:hover {
+  background-color: #303f9f;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); /* Deeper shadow on hover */
+}
+
+.form-buttons button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Lighter shadow on click */
+}
+.ssi-prediction-button {
+  background-color: darkred !important;
+  color: white !important;
+  font-size: 20px !important;
+  padding: 15px 30px !important;
+  border: none !important;
+  border-radius: 25px !important; /* Unique shape */
+  cursor: pointer !important;
+  margin-top: 15px !important;
+  font-weight: bold !important;
+  transition: background-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.ssi-prediction-button:hover {
+  background-color: coral !important;
+  transform: scale(1.05) !important;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .taskbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .logo-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hospital-name {
+    font-size: 1.6em;
+  }
+
+  .form-buttons {
+    width: 90%;
+  }
+
+  .form-buttons button {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}

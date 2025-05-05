@@ -1,0 +1,90 @@
+# ---------------------
+# PYTHON / DJANGO BACKEND
+# ---------------------
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*/__pycache__/
+
+# Django files
+*.log
+*.pot
+*.sqlite3
+local_settings.py
+
+# Django-specific folders
+**/migrations/
+**/migrations/*.py
+**/migrations/*.pyc
+
+# Media & static
+/media/
+/static/
+/staticfiles/
+/backend/static/
+/backend/media/
+
+# Environment variables
+.env
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# ---------------------
+# NODE / REACT FRONTEND
+# ---------------------
+
+# Dependency folders
+node_modules/
+frontend/node_modules/
+.pnp/
+.pnp.js
+
+# Testing
+coverage/
+
+# Build output
+build/
+frontend/build/
+
+# Local environment overrides
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Incorrect folder typo
+node_modulles/
+cache/
+
+# ---------------------
+# GENERAL
+# ---------------------
+*.swp
+*.swo
+*.bak
+*.tmp
+*.zip
+*.tar.gz
+*.rar

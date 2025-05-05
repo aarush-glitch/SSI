@@ -1,0 +1,57 @@
+.ssi-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.ssi-heading {
+  text-align: center;
+  color: #333;
+  font-size: 28px;
+  margin-bottom: 30px;
+}
+
+
+.ssi-chart {
+  text-align: center;
+}
+
+
+.ssi-subheading {
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: #555;
+}
+
+
+.chart-image {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+
+.ssi-alert-text {
+  margin-top: 30px;
+  background-color: #fff4e5;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  padding: 16px;
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+
+.alert-icon {
+  font-size: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+
