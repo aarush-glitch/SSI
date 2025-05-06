@@ -639,7 +639,7 @@ const SurveillanceForm = () => {
         <input type="number" name="height" value={formData.height} onChange={handleChange} style={{ gridColumn: 'span 1' }} /> */}
 
         <label style={{ gridColumn: 'span 1' }}>BMI:</label>
-        <input type="number" name="bmi" value={formData.bmi} style={{ gridColumn: 'span 1' }} />
+        <input type="number" name="bmi" value={formData.bmi} onChange={handleChange} style={{ gridColumn: 'span 1' }} />
 
         <label style={{ gridColumn: 'span 1' }}>Length of Surgery (hours):</label>
         <input type="number" name="lengthOfSurgery" value={formData.lengthOfSurgery} onChange={handleChange} required style={{ gridColumn: 'span 1' }} />
